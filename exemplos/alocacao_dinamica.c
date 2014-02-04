@@ -168,11 +168,84 @@ int testa_multiplos_malloc() {
 	return EXIT_SUCCESS;
 }
 
+int exemplo_realloc() {
+	int i, N = 4;
+
+	/* Requisição de memória. */
+	int *ptr = (int *)realloc(NULL, N*sizeof(int));
+
+	if(!ptr) {
+		printf("\nNão foi possível alocar %ld bytes de memória.", N*sizeof(int));
+		return EXIT_FAILURE;
+	}
+
+	/* Mostrar o que está na memória alocada. */
+	printf("\nValores na memória %p: ", ptr);
+	mostra_vetor_int(ptr, N, ",");
+
+	/* Definir valores e mostrá-los. */
+	for(i = 0; i < N; i++) ptr[i] = i + 1;
+	printf("\nValores na memória %p: ", ptr);
+	mostra_vetor_int(ptr, N, ",");
+	
+	/* Mudança de tamanho e nova requisição de memória. */
+	N *= 2;
+	ptr = (int *)realloc(ptr, N*sizeof(int));
+
+	if(!ptr) {
+		printf("\nNão foi possível alocar %ld bytes de memória.", N*sizeof(int));
+		return EXIT_FAILURE;
+	}
+
+	/* Mostrar o que está na memória alocada após realocação. */
+	printf("\n[realloc(ptr, %d)]\nValores na memória %p:", N, ptr);
+	mostra_vetor_int(ptr, N, ",");
+
+	/* Definir valores e mostrá-los. */
+	for(i = 0; i < N; i++) ptr[i] = N - i;
+	printf("\nValores na memória %p: ", ptr);
+	mostra_vetor_int(ptr, N, ",");
+
+	/* Mudança de tamanho e nova requisição de memória. */
+	N /= 4;
+	ptr = (int *)realloc(ptr, N*sizeof(int));
+
+	if(!ptr) {
+		printf("\nNão foi possível alocar %ld bytes de memória.", N*sizeof(int));
+		return EXIT_FAILURE;
+	}
+
+	/* Mostrar o que está na memória alocada após realocação. */
+	printf("\n[realloc(ptr, %d)]\nValores na memória %p:", N, ptr);
+	mostra_vetor_int(ptr, N, ",");
+
+	/* Mudança de tamanho e nova requisição de memória. */
+	N = 0;
+	ptr = (int *)realloc(ptr, N*sizeof(int));
+
+	/* Este comportamento depende do compilador! O padrão ANSI garante que o ptr
+	é NULL, os outros não se pode dizer... */
+
+	/* Mostrar o que está na memória alocada após realocação. */
+	printf("\n[realloc(ptr, %d)]\nValores na memória %p:", N, ptr);
+	mostra_vetor_int(ptr, N, ",");
+
+	/*Ok, terminado... */
+	free(ptr), ptr = NULL; /* Sempre! */
+	printf("\n");
+
+	return EXIT_SUCCESS;
+}
+
+
 int main() {
 	if(exemplo_malloc() != EXIT_SUCCESS)
 		return EXIT_FAILURE;
 	
 	if(exemplo_calloc() != EXIT_SUCCESS)
+		return  EXIT_FAILURE;
+
+	if(exemplo_realloc() != EXIT_SUCCESS)
 		return  EXIT_FAILURE;
 	
 	if(testa_multiplos_malloc() != EXIT_SUCCESS)

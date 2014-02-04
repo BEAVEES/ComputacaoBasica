@@ -18,8 +18,11 @@ int main (){
 	}
 	/* De novo! */
 	while(i > 0) printf("%d ", --i);
+	
+	/* De novo! */
+	i = N;
+	while(i--) printf("%d ", i);
 
-	i = 0;
 	int soma = 0;
 	while(i <= N) {
 		soma += i;

@@ -2,7 +2,7 @@
  *
  * Autor: Guilherme N. Ramos (gnramos@unb.br)
  * 
- * Exemplos de leitura/escrita de um arquivo texto. */
+ * Exemplos de leitura/escrita de um arquivo binario. */
 
 #include "utils.h" /* funções auxiliares */
 
