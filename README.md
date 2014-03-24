@@ -13,10 +13,15 @@ pelo nome do artigo. O código segue o [padrão
 ANSI](http://pt.wikipedia.org/wiki/Biblioteca_padr%C3%A3o_do_C#Padr.C3.A3o_ANSI), 
 e pode ser compilado com o seguinte comando:
 
-<code>gcc -Wall -ansi codigo_fonte.c -o nome_executavel</code>
+    gcc -Wall -ansi codigo_fonte.c -o nome_executavel
 
 Por exemplo:
-<code>gcc -Wall -ansi ola_turma.c -o oi</code>
+
+    gcc -Wall -ansi ola_turma.c -o oi
+    
+E para executar:
+
+    ./oi
 
 ### Erros
 
